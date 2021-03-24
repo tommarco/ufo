@@ -41,15 +41,20 @@ public class TestDB {
 		st.close();
 		System.out.println(formeUFO);
 		
-		String sql2=" SELECT COUNT(*) AS cnt FROM sighting WHERE shape= ? ";
+		String sql2=" SELECT COUNT(*) AS cnt FROM sighting WHERE shape= ? "; //PASSO 1 SCRIVO LA QUERY
 		String shapeScelta="circle";
-		PreparedStatement st2= conn.prepareStatement(sql2);
-		st2.setString(1, shapeScelta);
+		PreparedStatement st2= conn.prepareStatement(sql2); // PASSO 2 PREPARO LO STATEMENT E RICEVE LA STRINGA
+		// CONTENENTE I PARAMETRI
+		st2.setString(1, shapeScelta); // IMPOSTO IL VALORE DEI PARAMETRI IN QUESTO SI HA UN PARAMETRO IN CUI
+		// NEL PUNTO INTERROGATIVO SI VA A SOSTITUIRE IL VALORE SHAPESCELTA
 		ResultSet res2= st2.executeQuery();
-		res2.first();
+		res2.first(); // METTO QUESTO PERCHè ESSENDO CHE MI RESTITUISCE SOLO UNA RIGA
+		// USO .FIRST
 		
 		int count= res2.getInt("cnt");
 		st.close();
+		
+		System.out.println("UFO di forma "+shapeScelta+" sono: "+count);
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
